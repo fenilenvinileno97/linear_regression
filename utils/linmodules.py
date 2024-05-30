@@ -1,7 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from seaborn import palettes
 # from sklearn.linear_model import LinearRegression
 # from sklearn.metrics import mean_squared_error
+
+class LinearRegressionGD:
+    def __init__(self, eta=0.01, n_iter=50, random_state=1):
+        self.eta = eta
+        self.n_iter = n_iter
+        self.random_state = random_state
+        
+    def fit(self, X, y):
+        rgen = np.random.RandomState(self.random_state)
+        self.w_ = rgen.normal(loc=0.0, scale=0.01, size=X.shape[1])
+        self.b_ = np.array([0.])
+        self.losses = []
+        
+        for i in range(self.n_iter):
+            output = self.net_input(X)
+            errors = (y - output)
+            self.w += self.eta * 2.0 * X.T.dot(errors) / X.shape[0]
+            self.b_ += self.eta * 2.0 * errors.mean()
+            loss = (errors**2).mean()
+            self.losses_.append(loss)
+        return self
 
 def plot_vector(vecs, cols):
     plt.axhline(y=0, color="gray", zorder=0)
@@ -41,6 +63,10 @@ def plot_matrix_2x2(matrix, col_vector=["blue", "red"]):
     plot_vector(vecs=[u,v], cols=[col_vector[0], col_vector[1]])
     plt.plot(v1, v2, color="green", alpha=0.7)
     plt.plot(v1_neg, v2_neg, color="green", alpha=0.7)
+    
+def plot_matrix_mxn(matrix, col_vector=palettes.husl_palette):
+    vecs = [vec for vec in matrix.T]
+    plot_vector(vecs, cols=col_vector)
 
 def run():
     pass
