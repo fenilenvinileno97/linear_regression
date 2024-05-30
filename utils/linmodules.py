@@ -7,7 +7,7 @@ def plot_vector(vecs, cols):
     plt.axhline(y=0, color="gray", zorder=0)
     plt.axvline(x=0, color="gray", zorder=0)
     for i in range(len(vecs)):
-        x = np.concatenate(vecs[i])
+        x = np.concatenate([[0,0], vecs[i]])
         plt.quiver(
             x[0],
             x[1],
