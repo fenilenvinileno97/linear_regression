@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from seaborn import palettes
-# from sklearn.linear_model import LinearRegression
-# from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 class LinearRegressionGD:
     def __init__(self, eta=0.01, n_iter=50, random_state=1):
@@ -67,6 +69,38 @@ def plot_matrix_2x2(matrix, col_vector=["blue", "red"]):
 def plot_matrix_mxn(matrix, col_vector=palettes.husl_palette):
     vecs = [vec for vec in matrix.T]
     plot_vector(vecs, cols=col_vector)
+
+def lin_regplot(X, y, model, style="classic"):
+    plt.style.use(style)
+    plt.scatter(X, y, c="steelblue", edgecolor="white", s=70)
+    plt.plot(X, model.predict(X), color="red", lw=2)
+    
+def multl_model(df, col_y):
+    """To train and test a multivariate linear model based on a set of x data in columns."""
+    # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
+    x_cols = list(set(df.columns)) - set([col_y])
+    y_col = [col_y]
+    
+    X = df[x_cols].values
+    y = df[y_col].values
+
+    # Normalizing variables
+    X_train, X_test, y_train, y_test = train_test_split(X,y)
+    sc_x = StandardScaler().fit(X) 
+    sc_y = StandardScaler().fit(y)
+    
+    # Training the model
+    X_train = sc_x.transform(X_train)
+    X_test = sc_x.transform(X_test)
+    y_train = sc_y.transform(y_train)
+    y_test = sc_y.transform(y_test)
+    
+    # Testing the model
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    return y_pred
+    
 
 def run():
     pass
