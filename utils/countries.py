@@ -2,9 +2,9 @@ import plotly as px
 from typing import Dict, Set
 
 regions =  {
-    "south_america" : ['Colombia', 'Venezuela', 'Suriname', 'French Guiana', 'Guyana', 'Ecuador', 'Peru', 'Bolivia', 'Chile', 'Paraguay', 'Brazil', 'Uruguay', 'Argentina'],
+    "South America" : ['Colombia', 'Venezuela', 'Suriname', 'French Guiana', 'Guyana', 'Ecuador', 'Peru', 'Bolivia', 'Chile', 'Paraguay', 'Brazil', 'Uruguay', 'Argentina'],
     
-    "asia" : [
+    "Asia" : [
         'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei', 'Cambodia',
         'China', 'Cyprus', 'Georgia', 'India', 'Indonesia', 'Iran', 'Iraq', 'Israel', 'Japan', 'Jordan',
         'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar',
@@ -12,7 +12,7 @@ regions =  {
         'Singapore', 'South Korea', 'Sri Lanka', 'Syria', 'Taiwan', 'Tajikistan', 'Thailand', 'Timor',
         'Turkey', 'Turkmenistan', 'United Arab Emirates', 'Uzbekistan', 'Vietnam', 'Yemen', 'Macao', 'Christmas Island', 'Hong Kong'],
     
-    "europe" : [
+    "Europe" : [
         'Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia',
         'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary',
         'Iceland', 'Ireland', 'Italy', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta',
@@ -21,7 +21,7 @@ regions =  {
         'Ukraine', 'United Kingdom', 'Faeroe Islands', 'Greenland', 'Sint Maarten (Dutch part)', 'Martinique', 'Bermuda', 'Aruba'
     ],
     
-    "africa" : [
+    "Africa" : [
         'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cape Verde', 'Cameroon',
         'Central African Republic', 'Chad', 'Comoros', 'Democratic Republic of Congo', 'Congo',
         'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Eswatini', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana',
@@ -31,14 +31,14 @@ regions =  {
         'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe', 'Mayotte', 'Saint Helena', 'Reunion'
     ],
     
-    "north_america" : [
+    "North America" : [
         'Antigua and Barbuda', 'Bahamas', 'Barbados', 'Belize', 'Canada', 'Costa Rica', 'Cuba', 'Dominica',
         'Dominican Republic', 'El Salvador', 'Grenada', 'Guatemala', 'Haiti', 'Honduras', 'Jamaica', 'Mexico',
         'Nicaragua', 'Panama', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines',
         'Trinidad and Tobago', 'United States', 'Montserrat', 'Anguilla', 'Bermuda', 'Aruba', 'Turks and Caicos Islands', 'Guadeloupe', 'Saint Pierre and Miquelon', 'Puerto Rico', 'Curacao'
     ],
     
-    "oceania" : [
+    "Oceania" : [
         'Australia', 'Fiji', 'Kiribati', 'Marshall Islands', 'Micronesia', 'Nauru', 'New Zealand', 'Palau', 'Papua New Guinea',
         'Samoa', 'Solomon Islands', 'Tonga', 'Tuvalu', 'Vanuatu', 'New Caledonia', 'Wallis and Futuna', 'French Polynesia', 'Niue', 'Cook Islands'
     ]
