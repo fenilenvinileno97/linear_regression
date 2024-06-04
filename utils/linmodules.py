@@ -75,32 +75,61 @@ def lin_regplot(X, y, model, style="classic"):
     plt.scatter(X, y, c="steelblue", edgecolor="white", s=70)
     plt.plot(X, model.predict(X), color="red", lw=2)
     
-def multl_model(df, col_y):
-    """To train and test a multivariate linear model based on a set of x data in columns."""
-    # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
-    x_cols = list(set(df.columns)) - set([col_y])
-    y_col = [col_y]
+class LinearModel:
+    def __init__(self, obj_):
+        self.obj_ = obj_
     
-    X = df[x_cols].values
-    y = df[y_col].values
+    def linear_model(self, col_x, col_y):
+        """To train and test a multivariate linear model based on a set of given x data columns."""
+        # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
+        x_cols = self.obj_[col_x]
+        y_col = [col_y]
+        
+        X = self.obj_[x_cols].values
+        y = self.obj_[y_col].values
 
-    # Normalizing variables
-    X_train, X_test, y_train, y_test = train_test_split(X,y)
-    sc_x = StandardScaler().fit(X) 
-    sc_y = StandardScaler().fit(y)
+        # Normalizing variables
+        X_train, X_test, y_train, y_test = train_test_split(X,y)
+        sc_x = StandardScaler().fit(X) 
+        sc_y = StandardScaler().fit(y)
+        
+        # Training the model
+        X_train = sc_x.transform(X_train)
+        X_test = sc_x.transform(X_test)
+        y_train = sc_y.transform(y_train)
+        y_test = sc_y.transform(y_test)
+        
+        # Testing the model
+        model = LinearRegression()
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        return y_pred
     
-    # Training the model
-    X_train = sc_x.transform(X_train)
-    X_test = sc_x.transform(X_test)
-    y_train = sc_y.transform(y_train)
-    y_test = sc_y.transform(y_test)
-    
-    # Testing the model
-    model = LinearRegression()
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
-    return y_pred
-    
+    def multl_model(self, col_y):
+        """To train and test a multivariate linear model based on a set of x data in columns."""
+        # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
+        x_cols = list(set(self.obj_.columns)) - set([col_y])
+        y_col = [col_y]
+        
+        X = self.obj_[x_cols].values
+        y = self.obj_[y_col].values
+
+        # Normalizing variables
+        X_train, X_test, y_train, y_test = train_test_split(X,y)
+        sc_x = StandardScaler().fit(X) 
+        sc_y = StandardScaler().fit(y)
+        
+        # Training the model
+        X_train = sc_x.transform(X_train)
+        X_test = sc_x.transform(X_test)
+        y_train = sc_y.transform(y_train)
+        y_test = sc_y.transform(y_test)
+        
+        # Testing the model
+        model = LinearRegression()
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        return y_pred
 
 def run():
     pass
