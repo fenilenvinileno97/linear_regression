@@ -1,4 +1,5 @@
 import plotly as px
+from typing import Dict, Set
 
 regions =  {
     "south_america" : ['Colombia', 'Venezuela', 'Suriname', 'French Guiana', 'Guyana', 'Ecuador', 'Peru', 'Bolivia', 'Chile', 'Paraguay', 'Brazil', 'Uruguay', 'Argentina'],
@@ -28,7 +29,8 @@ regions =  {
         'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Rwanda',
         'Sao Tome and Principe', 'Senegal', 'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan',
         'Sudan', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe', 'Mayotte', 'Saint Helena', 'Reunion'
-    ]
+    ],
+    
     "north_america" : [
         'Antigua and Barbuda', 'Bahamas', 'Barbados', 'Belize', 'Canada', 'Costa Rica', 'Cuba', 'Dominica',
         'Dominican Republic', 'El Salvador', 'Grenada', 'Guatemala', 'Haiti', 'Honduras', 'Jamaica', 'Mexico',
@@ -41,3 +43,27 @@ regions =  {
         'Samoa', 'Solomon Islands', 'Tonga', 'Tuvalu', 'Vanuatu', 'New Caledonia', 'Wallis and Futuna', 'French Polynesia', 'Niue', 'Cook Islands'
     ]
 }
+
+def find_countries_by_region(countries: Set[str], region_dict: Dict[str, Set[str]]) -> Dict[str, Set[str]]:
+  """
+  Finds countries belonging to each region in the provided dictionary.
+
+  Args:
+      countries: A set of country names.
+      region_dict: A dictionary mapping region names to sets of countries in that region.
+
+  Returns:
+      A dictionary where keys are region names and values are sets of countries belonging to that region.
+  """
+
+  # Initialize a dictionary to store results
+  countries_by_region = {region: set() for region in region_dict.keys()}
+
+  # Find intersection of countries and each region's countries
+  for country in countries:
+    for region, region_countries in region_dict.items():
+      if country in region_countries:
+        countries_by_region[region].add(country)
+
+  # Return the dictionary with countries grouped by region
+  return countries_by_region
