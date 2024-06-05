@@ -28,19 +28,24 @@ class LinearRegressionGD:
             self.losses_.append(loss)
         return self
     
+try:
+    del pd.DataFrame.lmodels
+except AttributeError:
+    pass
+   
 @pd.api.extensions.register_dataframe_accessor('LinearModel')    
 class LinearModel:
-    def __init__(self, pandas_obj):
+    def __init__(self, pandas_obj) -> pd.DataFrame:
         self._df = pandas_obj
-    
+        
     def linear_model(self, col_x, col_y):
         """To train and test a multivariate linear model based on a set of given x data columns."""
         # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
         x_cols = self._df[col_x]
-        y_col = [col_y]
+        y_col = self._df[col_y]
         
-        X = self._df[x_cols].values
-        y = self._df[y_col].values
+        X = x_cols.values.reshape(-1,1)
+        y = y_col.values.reshape(-1,1)
 
         # Normalizing variables
         X_train, X_test, y_train, y_test = train_test_split(X,y)
@@ -60,7 +65,7 @@ class LinearModel:
         return y_pred
     
     def multl_model(self, col_y):
-        """To train and test a multivariate linear model based on a set of x data in columns."""
+        """To train and test a multivariate linear model based on a set of x data in columns by discriminating the value to predict."""
         # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
         x_cols = list(set(self._df.columns)) - set([col_y])
         y_col = [col_y]
