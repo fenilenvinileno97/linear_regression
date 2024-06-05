@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from seaborn import palettes
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
@@ -27,9 +28,10 @@ class LinearRegressionGD:
             self.losses_.append(loss)
         return self
     
+@pd.api.extensions.register_dataframe_accessor('LinearModel')    
 class LinearModel:
-    def __init__(self, obj_):
-        self.obj_ = obj_
+    def __init__(self, pandas_obj):
+        self._df = pandas_obj
     
     def linear_model(self, col_x, col_y):
         """To train and test a multivariate linear model based on a set of given x data columns."""
@@ -131,7 +133,6 @@ def lin_regplot(X, y, model, style="classic"):
     plt.scatter(X, y, c="steelblue", edgecolor="white", s=70)
     plt.plot(X, model.predict(X), color="red", lw=2)
     
-
 def run():
     pass
 
