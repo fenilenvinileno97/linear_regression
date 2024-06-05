@@ -39,8 +39,8 @@ class LinearModel:
         x_cols = self.obj_[col_x]
         y_col = [col_y]
         
-        X = self.obj_[x_cols].values
-        y = self.obj_[y_col].values
+        X = self._df[x_cols].values
+        y = self._df[y_col].values
 
         # Normalizing variables
         X_train, X_test, y_train, y_test = train_test_split(X,y)
@@ -65,8 +65,8 @@ class LinearModel:
         x_cols = list(set(self.obj_.columns)) - set([col_y])
         y_col = [col_y]
         
-        X = self.obj_[x_cols].values
-        y = self.obj_[y_col].values
+        X = self._df[x_cols].values
+        y = self._df[y_col].values
 
         # Normalizing variables
         X_train, X_test, y_train, y_test = train_test_split(X,y)
