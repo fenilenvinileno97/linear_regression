@@ -36,7 +36,7 @@ class LinearModel:
     def linear_model(self, col_x, col_y):
         """To train and test a multivariate linear model based on a set of given x data columns."""
         # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
-        x_cols = self.obj_[col_x]
+        x_cols = self._df[col_x]
         y_col = [col_y]
         
         X = self._df[x_cols].values
@@ -62,7 +62,7 @@ class LinearModel:
     def multl_model(self, col_y):
         """To train and test a multivariate linear model based on a set of x data in columns."""
         # Setting x_cols, which are the set of independent variables, and y_col which is the variable to predict.
-        x_cols = list(set(self.obj_.columns)) - set([col_y])
+        x_cols = list(set(self._df.columns)) - set([col_y])
         y_col = [col_y]
         
         X = self._df[x_cols].values
